@@ -1,0 +1,27 @@
+{
+  "extends": ["react-app", "plugin:prettier/recommended"],
+  "rules": {
+    "no-console": "warn",
+    
+    "comma-dangle": ["error", "never"],
+    "no-unused-vars": [
+      "error",
+      {
+        "vars": "local",
+        "args": "none"
+      }
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
+    "react/prefer-stateless-function": [
+      0,
+      {
+        "ignorePureComponents": true
+      }
+    ]
+  }
+}
