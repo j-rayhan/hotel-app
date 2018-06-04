@@ -24,7 +24,7 @@ type User {
     img: String!
 }
 type Mutation {
-
+  addUser(name: String!, age: Int!, email: String!, img: String!): User
 }
 type Query {
     users: [User]

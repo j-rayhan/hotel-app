@@ -5,9 +5,6 @@ import { Button } from "semantic-ui-react";
 class Home extends Component {
   state = {};
   render() {
-    console.log("====================================");
-    console.log(this.props);
-    console.log("====================================");
     return (
       <div>
         <Button primary>Primary</Button>

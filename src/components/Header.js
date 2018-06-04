@@ -7,8 +7,8 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <NavLink to="/userform">Insert New User</NavLink>
-        <NavLink to="/userDetails">User</NavLink>
+        <NavLink to="/userform">Insert New User </NavLink>
+        <NavLink to="/users">// All User</NavLink>
         <NavLink to="/"> Home </NavLink>
       </div>
     );

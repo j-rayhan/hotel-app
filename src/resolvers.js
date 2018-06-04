@@ -7,22 +7,23 @@ export const defaults = {
 
 let nextId = 0;
 
-const query = gql`
-  query users {
-    users @client {
-      id
-      name
-      age
-      img
-      email
-    }
-  }
-`;
-
 export const resolvers = {
   Mutation: {
     addUser: (_, { name, age, img, email }, { cache }) => {
+      console.log("Mutation: ", name);
+      const query = gql`
+        query users {
+          users @client {
+            id
+            name
+            age
+            img
+            email
+          }
+        }
+      `;
       const previous = cache.readQuery({ query });
+      console.log("Previour: ", previous.users);
       const newUser = {
         id: nextId++,
         name,
@@ -31,8 +32,10 @@ export const resolvers = {
         email,
         __typename: "UserType"
       };
+      // console.log("Previour: ", newUser);
+
       const data = {
-        users: previous.users.concate([newUser])
+        users: previous.users.concat([newUser])
       };
       cache.writeData({ data });
       return newUser;
