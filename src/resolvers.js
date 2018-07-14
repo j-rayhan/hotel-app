@@ -1,8 +1,10 @@
 // @flow
 import gql from "graphql-tag";
 
+import hotels from "./db";
 export const defaults = {
-  users: []
+  users: [],
+  hotels: hotels
 };
 
 let nextId = 0;
@@ -10,7 +12,7 @@ let nextId = 0;
 export const resolvers = {
   Mutation: {
     addUser: (_, { name, age, img, email }, { cache }) => {
-      console.log("Mutation: ", name);
+      // console.log("Mutation: ", name);
       const query = gql`
         query users {
           users @client {
@@ -23,7 +25,7 @@ export const resolvers = {
         }
       `;
       const previous = cache.readQuery({ query });
-      console.log("Previour: ", previous.users);
+      // console.log("Previour: ", previous.users);
       const newUser = {
         id: nextId++,
         name,

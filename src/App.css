@@ -13,6 +13,19 @@
   padding: 20px;
   color: white;
 }
+.react-datepicker__input-container > input {
+  border: none;
+  padding: 10px;
+}
+.ui.fluid.input > input {
+  border: none;
+}
+.App-banner {
+  background-color: rgb(57, 68, 160);
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
 
 .App-title {
   font-size: 1.5em;
@@ -23,6 +36,10 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

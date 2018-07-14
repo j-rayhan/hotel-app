@@ -8,7 +8,7 @@ import { ApolloProvider } from "react-apollo";
 
 import "./index.css";
 import "semantic-ui-css/semantic.min.css";
-
+import "react-datepicker/dist/react-datepicker.css";
 import App from "./App";
 import { resolvers, defaults } from "./resolvers";
 import registerServiceWorker from "./registerServiceWorker";
@@ -27,7 +27,8 @@ type Mutation {
   addUser(name: String!, age: Int!, email: String!, img: String!): User
 }
 type Query {
-    users: [User]
+    users: [User],
+    user(id: Int!): User
 }
 `;
 

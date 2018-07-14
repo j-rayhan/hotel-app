@@ -1,11 +1,5 @@
 // @flow
-import React, { Component } from "react";
+import React from "react";
 
-class NotFoundPage extends Component {
-  state = {};
-  render() {
-    return <h1>NotFoundPage User</h1>;
-  }
-}
-
+const NotFoundPage = () => <h1>400! Page Not Found</h1>;
 export default NotFoundPage;
