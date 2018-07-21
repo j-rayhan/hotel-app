@@ -20,22 +20,6 @@ const GET_HOTELS = gql`
 `;
 class Hotels extends Component {
   state = {};
-  geolocation = () => {
-    console.log("..............geolocation........");
-
-    // if (navigator.geolocation) {
-    //   navigator.geolocation.watchPosition(this.showPosition);
-    // } else {
-    //   alert("Geolocation is not supported by this browser.");
-    // }
-  };
-
-  // showPosition = position => {
-  //   let p = {
-  //     Latitude: position.coords.latitude,
-  //     Longitude: position.coords.longitude
-  //   };
-  // }
   render() {
     const hotel = this.props.data.hotels.map(hotel => (
       <div key={hotel.id}>

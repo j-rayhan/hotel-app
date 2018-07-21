@@ -2,13 +2,11 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import { compose, withProps, lifecycle } from "recompose";
-
 import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
   Marker,
-  DirectionsRenderer,
   TrafficLayer
 } from "react-google-maps";
 import { SearchBox } from "react-google-maps/lib/components/places/SearchBox";
@@ -87,6 +85,7 @@ const MyMapComponent = compose(
               Lng: position.coords.longitude
             };
             console.log(p);
+            console.log("....", this.state);
             this.setState({
               center: p
             });
@@ -104,7 +103,7 @@ const MyMapComponent = compose(
 )(props => (
   <GoogleMap
     ref={props.onMapMounted}
-    defaultZoom={13}
+    defaultZoom={8}
     center={props.center}
     onBoundsChanged={props.onBoundsChanged}
   >
@@ -147,7 +146,6 @@ class CustomMap extends Component {
   render() {
     return (
       <div>
-        <h1>Place of map you include the map here</h1>
         <MyMapComponent />
       </div>
     );

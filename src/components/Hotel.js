@@ -1,17 +1,8 @@
 // @flow
 import React, { Component } from "react";
-import { Carousel } from "react-responsive-carousel";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import {
-  Grid,
-  Item,
-  Button,
-  Icon,
-  Message,
-  Checkbox,
-  Rating
-} from "semantic-ui-react";
+import { Item, Button, Icon } from "semantic-ui-react";
 
 import MyCarousel from "./hotel/HotelCarousel";
 import Overview from "./hotel/Overview";

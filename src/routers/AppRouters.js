@@ -9,6 +9,7 @@ import NotFoundPage from "../components/NotFoundPage";
 import Header from "../components/Header";
 import Hotels from "../components/Hotels";
 import Hotel from "../components/Hotel";
+import AddHotel from "../components/createHotel/AddHotel";
 
 import HomePag from "../components/HomePage";
 
@@ -17,6 +18,7 @@ const AppRouters = () => (
     <div>
       <Switch>
         <Route path="/" component={HomePag} exact={true} />
+        <Route path="/a" component={AddHotel} exact={true} />
         <Route path="/userform" component={UserForm} />
         <Route path="/users" component={UserList} />
         <Route path="/userDetails/:id" component={UserDetails} />
