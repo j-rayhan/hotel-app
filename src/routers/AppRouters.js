@@ -16,6 +16,7 @@ import HomePag from "../components/HomePage";
 const AppRouters = () => (
   <BrowserRouter>
     <div>
+      <Header/>
       <Switch>
         <Route path="/" component={HomePag} exact={true} />
         <Route path="/a" component={AddHotel} exact={true} />

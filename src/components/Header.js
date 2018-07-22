@@ -9,14 +9,12 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <NavLink to="/userform">Insert New User </NavLink>
-        <NavLink to="/users"> All User</NavLink>
-        <NavLink to="/"> Home </NavLink>
-        <NavLink to="/hotels"> All Hotel </NavLink>
         <header className="App-header">
-          <h1 className="App-title">Welcome to React Hotel</h1>
-          <SearchBox />
-          <SearchOption />
+        <NavLink to="/userform">Insert New User </NavLink>
+        <NavLink to="/hotels"> All Hotel</NavLink>
+        <NavLink to="/"> Home </NavLink><br />
+        <NavLink to="/a">Insert New Hotel </NavLink>
+        
         </header>
       </div>
     );

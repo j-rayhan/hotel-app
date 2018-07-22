@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
@@ -16,6 +16,11 @@ const GET_USERS = gql`
   }
 `;
 
+// class UserList extends Component {
+//   state = {};
+//   render() {
+//     return (
+
 const UserList = () => (
   <Query query={GET_USERS}>
     {({ data: { users } }) => (
@@ -31,6 +36,8 @@ const UserList = () => (
     )}
   </Query>
 );
+//   }
+// }
 
 const GET_USER = gql`
   {
@@ -43,6 +50,9 @@ const GET_USER = gql`
     }
   }
 `;
+const UserList_q =() =>(
+  <div>User List</div>
+)
 
 const User = () => (
   <Query query={GET_USER}>

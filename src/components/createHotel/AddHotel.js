@@ -1,15 +1,44 @@
 //flow
 import React, { Component } from "react";
 import { Form } from "semantic-ui-react";
+import { Mutation , graphql } from "react-apollo";
+import gql from "graphql-tag";
 
-export default class AddHotel extends Component {
+const ADD_HOTEL = gql`
+  mutation addHotel($name: String!, $email: String!) {
+    addHotel(name: $name, email: $email) @client {
+      id
+    }
+  }
+`;
+const ADD_USER = gql`
+  mutation addUser($name: String!, $age: Int!, $email: String!, $img: String!) {
+    addUser(name: $name, age: $age, email: $email, img: $img) @client {
+      id
+    }
+  }
+`;
+const GET_HOTELS = gql`
+  {
+    hotels @client {
+      id
+      name
+      price
+      distance
+      rating
+      img
+    }
+  }
+`;
+
+ class AddHotel extends Component {
   state = {};
   render() {
     return (
       <div>
         <h1>Insert your hotel Information</h1>
 
-        <FormExampleFieldControl />
+        <FormExampleFieldControl {...this.props}/>
       </div>
     );
   }
@@ -35,8 +64,29 @@ class FormExampleFieldControl extends Component {
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
   toggle = () => this.setState({ checked: !this.state.checked });
-  handleSubmit = () => {
-    console.log("submit......", this.state);
+  handleSubmit = (e) => {
+    // console.log("submit......", this.state);
+    const {
+      name,
+      email,
+      country,
+      city,
+      telephone,
+      address,
+      checked,
+      overview
+    } = this.state;
+      e.preventDefault();
+      console.log('...add hotel....', this.props);
+      
+            this.props.mutate({
+                variables: { name: name.trim(), email: email.trim() },
+                refetchQueries: [{ query: GET_HOTELS }]
+            }).then((ddd) => {
+              console.log("data ", ddd);
+              // this.props.history.push('/hotels')
+              
+            });
   };
   render() {
     const {
@@ -57,6 +107,7 @@ class FormExampleFieldControl extends Component {
             placeholder="Hotel name"
             name="name"
             value={name}
+            autoComplete="off"
             onChange={this.handleChange}
           />
           <Form.Input
@@ -66,6 +117,7 @@ class FormExampleFieldControl extends Component {
             placeholder="Email"
             name="email"
             value={email}
+            autoComplete="off"
             onChange={this.handleChange}
           />
         </Form.Group>
@@ -75,6 +127,7 @@ class FormExampleFieldControl extends Component {
             placeholder="Country name"
             name="country"
             value={country}
+            autoComplete="off"
             onChange={this.handleChange}
           />
           <Form.Input
@@ -82,6 +135,7 @@ class FormExampleFieldControl extends Component {
             placeholder="City"
             name="city"
             value={city}
+            autoComplete="off"
             onChange={this.handleChange}
           />
           <Form.Input
@@ -89,6 +143,7 @@ class FormExampleFieldControl extends Component {
             placeholder="Telephone Number"
             name="telephone"
             value={telephone}
+            autoComplete="off"
             onChange={this.handleChange}
           />
         </Form.Group>
@@ -97,6 +152,7 @@ class FormExampleFieldControl extends Component {
           placeholder="Tell us more about you..."
           name="overview"
           value={overview}
+          autoComplete="off"
           onChange={this.handleChange}
         />
         <Form.TextArea
@@ -104,12 +160,14 @@ class FormExampleFieldControl extends Component {
           placeholder="Tell us about your address..."
           name="address"
           value={address}
+          autoComplete="off"
           onChange={this.handleChange}
         />
         <Form.Checkbox
           label="I agree to the Terms and Conditions"
           name="check"
           checked={checked}
+          autoComplete="off"
           onChange={this.toggle}
         />
         <Form.Button>Submit</Form.Button>
@@ -117,3 +175,93 @@ class FormExampleFieldControl extends Component {
     );
   }
 }
+
+
+const AddHotelWithMutation = graphql(
+  ADD_HOTEL
+)(AddHotel);
+// export default AddHotelWithMutation;
+
+const HotelForm = (props) => (
+  <Mutation mutation={ADD_HOTEL}>
+    {addUser => {
+      let name, age, email, img;
+      return (
+        <div>
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              addUser({
+                variables: {
+                  name: name.value,
+                  email: email.value
+                }
+              });
+              // .then(res => {
+                // console.log("====================================");
+                // console.log(props);
+                // console.log(this.props.history.push("/"));
+                // console.log("====================================");
+              // });
+              (name.value = ""),
+                (age.value = ""),
+                (email.value = ""),
+                (img.value = "");
+                props.history.push("/hotels");
+            }}
+          >
+          <Form>
+            <Form.Group widths="equal">
+              <Form.Input
+                label="Name"
+                placeholder="Hotel name"
+                ref={v => {
+                  name = v;
+                }}
+              />
+              <Form.Input
+                icon="at"
+                iconPosition="left"
+                label="Email "
+                placeholder="Email"
+                ref={v => {
+                  email = v;
+                }}
+              />
+            </Form.Group>
+          </Form>
+            Name:
+            <input
+              ref={v => {
+                name = v;
+              }}
+            />
+            Age:
+            <input
+              ref={v => {
+                age = v;
+              }}
+            />
+            Email:
+            <input
+              ref={v => {
+                email = v;
+              }}
+            />
+            Image:
+            <input
+              ref={v => {
+                img = v;
+              }}
+            />
+            <button type="submit">Add User</button>
+          </form>
+        </div>
+      );
+    }}
+  </Mutation>
+);
+//   }
+// }
+
+export default HotelForm;

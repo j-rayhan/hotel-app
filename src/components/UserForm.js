@@ -17,7 +17,7 @@ const ADD_USER = gql`
 //   render() {
 //     return (
 
-const UserForm = () => (
+const UserForm = (props) => (
   <Mutation mutation={ADD_USER}>
     {addUser => {
       let name, age, email, img;
@@ -39,9 +39,10 @@ const UserForm = () => (
               //   console.log(this.props.history.push("/"));
               //   console.log("====================================");
               // });
-              (name.value = "")((age.value = ""))((email.value = ""))(
-                (img.value = "")
-              );
+              // (name.value = "")((age.value = ""))((email.value = ""))(
+                // (img.value = "")
+              // );
+              props.history.push("/users");
             }}
           >
             Name:
