@@ -4,9 +4,13 @@ import hotels from "./db";
 let users= [
   {id:1,name:"ray",age:"22",email:"a@g.com",img:"",__typename: "UserType"}
 ];
+let houses = [
+{id:1, name: 'Rayhan House', email: "r@g.com",__typename: "HouseType"}
+]
 export const defaults = {
   users: users,
-  hotels: hotels
+  hotels: hotels,
+  houses: houses
 };
 
 let nextId = 2;
@@ -43,6 +47,33 @@ export const resolvers = {
       console.log("Previour: ", data);
       cache.writeData({ data });
       return newUser;
+    },
+    addHouse: (_, { name, email }, { cache }) => {
+      console.log("Mutation: ", name);
+      const query = gql`
+        query houses {
+          houses @client {
+            id
+            name
+            email
+          }
+        }
+      `;
+      const previous = cache.readQuery({ query });
+      console.log("Previour: ", previous.houses);
+      const newHouse = {
+        id: nextId++,
+        name,
+        email,
+        __typename: "HouseType"
+      };
+
+      const data = {
+        houses: previous.houses.concat([newHouse])
+      };
+      console.log("Add with old [] : ", data);
+      cache.writeData({ data });
+      return newHouse;
     },
     addHotel: (_, { name, email }, { cache }) => {
       // console.log("Mutation: ", name);

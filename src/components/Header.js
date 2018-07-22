@@ -14,6 +14,7 @@ class Header extends Component {
         <NavLink to="/hotels"> All Hotel</NavLink>
         <NavLink to="/"> Home </NavLink><br />
         <NavLink to="/a">Insert New Hotel </NavLink>
+        <NavLink to="/houseForm"> Insert New House </NavLink>
         
         </header>
       </div>

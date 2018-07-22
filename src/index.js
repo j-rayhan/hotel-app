@@ -23,12 +23,20 @@ type User {
     email: String!
     img: String!
 }
+type House {
+  id: Int!
+  name: String!
+  email: String!
+}
 type Mutation {
   addUser(name: String!, age: Int!, email: String!, img: String!): User
+  addHouse(name: String!, email: String!): House
 }
 type Query {
-    users: [User],
-    user(id: Int!): User
+  houses: [House],
+  users: [User],
+  user(id: Int!): User,
+  
 }
 `;
 
