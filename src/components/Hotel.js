@@ -15,9 +15,9 @@ const GET_HOTELS = gql`
       id
       name
       price
-      distance
-      rating
-      description
+      email
+      location
+      overview
       img
     }
   }
@@ -40,14 +40,13 @@ class Hotel extends Component {
               <Item>
                 <Item.Content>
                   <Item.Header as="a">{hotel.name}</Item.Header>
-                  <Overview description={hotel.description} />
+                  <Item.Extra>{hotel.price}</Item.Extra>
+                  <Overview description={hotel.overview} />
                   <Facilities />
                   <GuestReviews />
                   <PropertySurroundings />
-                  <Item.Extra>{hotel.price}</Item.Extra>
                 </Item.Content>
               </Item>
-              {hotel.img}
             </div>
           ))}
           <Button icon labelPosition="left" onClick={this.goBack}>

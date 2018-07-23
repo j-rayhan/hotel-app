@@ -1,4 +1,4 @@
-const hotels = [
+ let hotels = [
   {
     id: 1,
     name: "The Roosevelt New Orleans",

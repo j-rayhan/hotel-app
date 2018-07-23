@@ -28,15 +28,26 @@ type House {
   name: String!
   email: String!
 }
+type Hotel {
+  id: Int!
+  name: String!
+  email: String!
+  price: String!
+  location: String!
+  img: String!
+  overview: String!
+}
 type Mutation {
-  addUser(name: String!, age: Int!, email: String!, img: String!): User
-  addHouse(name: String!, email: String!): House
+  addUser(name: String!, age: Int!, email: String!, img: String!): User,
+  addHouse(name: String!, email: String!): House,
+  addHotel(name: String!, email: String!): Hotel,
+  addHotel_new(name: String!, email: String!, price: String!, location: String!, img: String!, overview: String!): Hotel
 }
 type Query {
   houses: [House],
   users: [User],
   user(id: Int!): User,
-  
+  hotels: [Hotel]
 }
 `;
 

@@ -184,62 +184,26 @@ const AddHotelWithMutation = graphql(
 
 const HotelForm = (props) => (
   <Mutation mutation={ADD_HOTEL}>
-    {addUser => {
-      let name, age, email, img;
+    {addHotel => {
+      let name, email;
       return (
         <div>
           <form
             onSubmit={e => {
               e.preventDefault();
-              addUser({
+              addHotel({
                 variables: {
                   name: name.value,
                   email: email.value
                 }
               });
-              // .then(res => {
-                // console.log("====================================");
-                // console.log(props);
-                // console.log(this.props.history.push("/"));
-                // console.log("====================================");
-              // });
-              (name.value = ""),
-                (age.value = ""),
-                (email.value = ""),
-                (img.value = "");
                 props.history.push("/hotels");
             }}
-          >
-          <Form>
-            <Form.Group widths="equal">
-              <Form.Input
-                label="Name"
-                placeholder="Hotel name"
-                ref={v => {
-                  name = v;
-                }}
-              />
-              <Form.Input
-                icon="at"
-                iconPosition="left"
-                label="Email "
-                placeholder="Email"
-                ref={v => {
-                  email = v;
-                }}
-              />
-            </Form.Group>
-          </Form>
+          >          
             Name:
             <input
               ref={v => {
                 name = v;
-              }}
-            />
-            Age:
-            <input
-              ref={v => {
-                age = v;
               }}
             />
             Email:
@@ -248,20 +212,12 @@ const HotelForm = (props) => (
                 email = v;
               }}
             />
-            Image:
-            <input
-              ref={v => {
-                img = v;
-              }}
-            />
             <button type="submit">Add User</button>
-          </form>
+            </form>
         </div>
       );
     }}
   </Mutation>
 );
-//   }
-// }
 
 export default HotelForm;

@@ -1,8 +1,9 @@
 // @flow
-import React, { Component } from "react";
-import { graphql, Query } from "react-apollo";
+import React from "react";
+import { Query } from "react-apollo";
+import { Link } from 'react-router-dom';
 import gql from "graphql-tag";
-import { Link } from "react-router-dom";
+
 import { Grid, Card, Image, Button, Icon } from "semantic-ui-react";
 import CustomMap from "./CustomMap";
 
@@ -11,22 +12,26 @@ const GET_HOTELS = gql`
     hotels @client {
       id
       name
+      email
       price
-      distance
-      rating
+      location
       img
+      overview
     }
   }
 `;
 
-class Hotels extends Component {
-  state = {};
-  render() {
-    console.log(" all hotel data...", this.props);
-    
-    const hotel = this.props.data.hotels.map(hotel => (
-      <div key={hotel.id}>
-        <Grid>
+const HotelList = () => (
+  <Query query={GET_HOTELS}>
+    {({ data: { hotels } }) => (
+      <Grid style={{marginTop: '10px'}}>
+      <Grid.Column width={4}>
+        <CustomMap />
+      </Grid.Column>
+      <Grid.Column width={12}>
+      {hotels.map(hotel => (
+          
+          <Grid>
           <Grid.Column width={16}>
             <Card fluid>
               <Card.Content header={hotel.name} />
@@ -36,11 +41,7 @@ class Hotels extends Component {
                     <Image src={hotel.img} size="large" target="_blank" />
                   </Grid.Column>
                   <Grid.Column width={9}>
-                    {hotel.distance}
-                    <div>
-                      <Button color="red">{hotel.rating}</Button>
-                      {hotel.reviews}
-                    </div>
+                    {hotel.email}
                   </Grid.Column>
                   <Grid.Column width={3}>
                     <div>
@@ -59,43 +60,18 @@ class Hotels extends Component {
 
               <Card.Content extra>
                 <Icon name="marker" />
-                {hotel.distance}
+                {hotel.location}
               </Card.Content>
             </Card>
           </Grid.Column>
         </Grid>
-      </div>
-    ));
-    return (
-      <div>
-        <Grid>
-          <Grid.Column width={4}>
-            <CustomMap />
-          </Grid.Column>
-          <Grid.Column width={12}>{hotel}</Grid.Column>
-        </Grid>
-      </div>
-    );
-  }
-}
-
-const HotelViewPageWithQuery = graphql(GET_HOTELS)(Hotels);
-
-
-const UserList = () => (
-  <Query query={GET_HOTELS}>
-    {({ data: { hotels } }) => (
-      <ul>
-        {hotels.map(user => (
-          <li key={user.id}>
-            {console.log("Map hotel List: ", user)}
-            Hotel Name: {user.name}
-          </li>
         ))}
-      </ul>
+      </Grid.Column>
+    </Grid>
+       
     )}
   </Query>
 );
 
 
-export default HotelViewPageWithQuery;
+export default HotelList;
