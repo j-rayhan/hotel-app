@@ -31,7 +31,7 @@ const HotelList = () => (
       <Grid.Column width={12}>
       {hotels.map(hotel => (
           
-          <Grid>
+          <Grid key={hotel.id}>
           <Grid.Column width={16}>
             <Card fluid>
               <Card.Content header={hotel.name} />

@@ -15,6 +15,7 @@ import HouseList from "../components/house/houses";
 import AddHouse from "../components/house/AddHouse";
 
 import HomePag from "../components/HomePage";
+// import HomePag from "../components/playground/ModalExample";
 
 const AppRouters = () => (
   <BrowserRouter>

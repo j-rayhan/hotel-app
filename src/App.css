@@ -34,7 +34,15 @@
 .App-intro {
   font-size: large;
 }
-
+.ui.page.modals.dimmer.transition.visible.active {
+  /* margin: 1rem auto !important; */
+  display: flex !important;
+}
+.ui.page.modals.transition.visible.active {
+  /* margin: 1rem auto!important; */
+  /* display: flex !important; */
+  margin-top: 0px;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

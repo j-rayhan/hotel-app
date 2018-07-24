@@ -1,7 +1,7 @@
 //flow
 import React, { Component } from "react";
 import _ from "lodash";
-import { compose, withProps, lifecycle } from "recompose";
+import { compose, withProps, lifecycle , withStateHandlers } from "recompose";
 import {
   withScriptjs,
   withGoogleMap,
@@ -24,18 +24,39 @@ const MyMapComponent = compose(
     containerElement: <div style={{ height: `400px` }} />,
     mapElement: <div style={{ height: `100%` }} />
   }),
+  withStateHandlers(() => ({
+    isOpen: true,
+    // m_lat: 0, m_lng: 0
+  }), {
+    onToggleOpen: ({ isOpen }) => () => ({
+      isOpen: false,
+    })
+  }),
   withScriptjs,
   withGoogleMap,
   lifecycle({
     componentWillMount() {
       const refs = {};
-
+      let showPosition = position => {
+        this.setState({
+          center: {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          },
+          // m_lat: position.coords.latitude, m_lng: position.coords.longitude
+        })
+      };
+      if (navigator.geolocation) {
+        navigator.geolocation.watchPosition(showPosition);
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
       this.setState({
         bounds: null,
-        center: {
-          lat: -34.397,
-          lng: 150.644
-        },
+        // center: {
+        //   lat: -34.397,
+        //   lng: 150.644
+        // },
         markers: [],
         onMapMounted: ref => {
           refs.map = ref;
@@ -85,17 +106,21 @@ const MyMapComponent = compose(
               Lng: position.coords.longitude
             };
             console.log(p);
-            console.log("....", this.state);
+            // console.log("..navigator..", navigator);
             this.setState({
-              center: p
+              center: {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+              }
             });
           };
           if (navigator.geolocation) {
             navigator.geolocation.watchPosition(showPosition);
+            console.log("..........");
           } else {
             alert("Geolocation is not supported by this browser.");
           }
-          console.log("..........");
+          // console.log("..navigator..", navigator);
         }
       });
     }
@@ -103,7 +128,7 @@ const MyMapComponent = compose(
 )(props => (
   <GoogleMap
     ref={props.onMapMounted}
-    defaultZoom={8}
+    defaultZoom={14}
     center={props.center}
     onBoundsChanged={props.onBoundsChanged}
   >
@@ -116,7 +141,7 @@ const MyMapComponent = compose(
       <div>
         <input
           type="text"
-          placeholder="Customized your placeholder"
+          placeholder="Customized placeholder"
           style={{
             boxSizing: `border-box`,
             border: `1px solid transparent`,
@@ -130,10 +155,11 @@ const MyMapComponent = compose(
             outline: `none`,
             textOverflow: `ellipses`
           }}
+          onClick={props.onToggleOpen}
         />
       </div>
     </SearchBox>
-    <button onClick={props.getLocation}>your place</button>
+    {/* {props.isOpen && <Marker position={{ lat: props.m_lat, lng: props.m_lat }} />} */}
 
     {props.markers.map((marker, index) => (
       <Marker key={index} position={marker.position} />
@@ -153,3 +179,6 @@ class CustomMap extends Component {
 }
 
 export default CustomMap;
+
+
+// https://gist.githubusercontent.com/farrrr/dfda7dd7fccfec5474d3/raw/758852bbc1979f6c4522ab4e92d1c92cba8fb0dc/data.json

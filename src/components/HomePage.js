@@ -8,11 +8,14 @@ import {
   Image,
   Grid,
   Container,
-  Input
+  Input,
+  Modal,
+  Header
 } from "semantic-ui-react";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import Signup from "./signup/SignUp";
+import CustomMap from "./CustomMap";
 
 // import slide_1 from "../assets/images/carousel/slider-1.jpg";
 // import slide_2 from "../assets/images/carousel/slider-2.jpg";
@@ -67,7 +70,7 @@ class MenuExampleInvertedSegment extends Component {
 }
 
 class Banner extends Component {
-  state = { startDate: undefined, endDate: undefined };
+  state = { startDate: undefined, endDate: undefined , trigger:false};
   handleChangeStart = date => this.setState({ startDate: date });
   handleChangeEnd = date => this.setState({ endDate: date });
   addOption = e => {
@@ -109,7 +112,9 @@ class Banner extends Component {
                 <Grid.Column>
                   <Segment style={{ textAlign: "left", padding: "7px" }}>
                     <Input
-                      fluid
+                      fluid 
+                      icon="search"
+                      iconPosition='left'
                       type="text"
                       placeholder="ENTER A DESTINATION OR PROPERTY"
                       name="destination"
@@ -157,9 +162,11 @@ class Banner extends Component {
                   </Segment>
                 </Grid.Column>
                 <Grid.Column>
-                  <Segment style={{ padding: "7px" }}>
+                  <Segment style={{ padding: "7px" }} raised>
                     <Input
                       fluid
+                      icon="users"
+                      iconPosition='left'
                       type="text"
                       placeholder="ADULTS"
                       name="adults"
@@ -169,7 +176,9 @@ class Banner extends Component {
                 <Grid.Column>
                   <Segment style={{ padding: "7px" }}>
                     <Input
-                      fluid
+                      fluid 
+                      icon="child"
+                      iconPosition='left'
                       type="text"
                       placeholder="CHILDREN"
                       name="children"
@@ -177,16 +186,45 @@ class Banner extends Component {
                   </Segment>
                 </Grid.Column>
               </Grid.Row>
-              <div style={{ margin: " 0 auto" }}>
-                <Button positive style={{ padding: "15px 5px" }}>
+              <div style={{ margin: " 0 auto", display: "flex" }}>
+                <Button positive style={{ padding: "12.5px 5px" }}>
                   CHECK AVAILABILITY
                 </Button>
+                <AdvancedSearchModal />
               </div>
             </Grid>
           </form>
         </Container>
       </div>
     );
+  }
+}
+
+// Advanced Search Modal
+class AdvancedSearchModal extends Component {
+  state = { open: false }
+
+  show = dimmer => () => this.setState({ dimmer, open: true })
+  close = () => this.setState({ open: false })
+
+  render() {
+    const { open, dimmer } = this.state
+
+    return (
+      <div>
+      <Input 
+        label={{ icon: 'asterisk' }} 
+        labelPosition='left corner' 
+        placeholder='Advanced Search...'
+        onClick={this.show('inverted')} 
+        />
+      <Modal size='small' dimmer={dimmer} open={open} onClose={this.close} closeIcon>
+        <Modal.Content>
+          <CustomMap />
+        </Modal.Content>
+      </Modal>
+    </div>
+    )
   }
 }
 

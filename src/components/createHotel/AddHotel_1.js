@@ -3,11 +3,7 @@ import React from "react";
 import { Form, Label , Button} from "semantic-ui-react";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
-  //include the fs, path modules
-import fs from 'fs';
-import path from 'path';
-  // var fs = require('fs');
-  // var path = require('path');
+
 const ADD_HOTEL = gql`
   mutation addHotel_new($name: String!, $email: String!, $location: String!, $img: String!, $price: String!, $overview: String!) {
     addHotel_new(name: $name, email: $email, location: $location, price: $price, img: $img overview: $overview) @client {
@@ -16,18 +12,6 @@ const ADD_HOTEL = gql`
   }
 `;
 
-var moveFile = (file, dir2)=>{
-  //gets file name and adds it to dir2
-  var f = path.basename(file);
-  var dest = path.resolve(dir2, f);
-
-  fs.rename(file, dest, (err)=>{
-    if(err) throw err;
-    else console.log('Successfully moved');
-  });
-};
-
-//move file1.htm from 'test/' to 'test/dir_1/'
 
 
 const HotelForm = (props) => (
@@ -45,7 +29,7 @@ const HotelForm = (props) => (
                   email: email,
                   location: location,
                   price: price,
-                  img: img,
+                  img: img_file,
                   overview: overview
                 }
               });
@@ -102,10 +86,16 @@ const HotelForm = (props) => (
           type="file" 
             name="img_file"
             onChange={e => {
-              console.log(".....files....", e.target.files[0]);
-              
-              img_file = e.target.files[0];
-              moveFile(img_file,'../');
+              let fileToLoad = e.target.files[0];
+              let fileReader = new FileReader();
+              // console.log("fileToLoad", fileToLoad);
+
+              fileReader.onload = function(fileLoadedEvent) {
+                let srcData = fileLoadedEvent.target.result; // <--- data: base64
+                // console.log(srcData);
+                img_file = srcData;
+              }
+              fileReader.readAsDataURL(fileToLoad);
             }}
             />
           </Form.Group>
@@ -118,28 +108,8 @@ const HotelForm = (props) => (
             overview = e.target.value
           }}
         />
-            <Form.Button>Add </Form.Button>
+            <Form.Button positive>Add </Form.Button>
             </Form>
-            <Label
-                as="al"
-                basic
-                htmlFor="upload"
-              >
-                <Button
-                    icon="upload"
-                    label={{
-                        basic: true,
-                        content: 'Select file(s)'
-                    }}
-                    labelPosition="right"
-                />
-                <input
-                    hidden
-                    id="upload"
-                    multiple
-                    type="file"
-                />
-            </Label>
         </div>
       );
     }}
