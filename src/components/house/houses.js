@@ -13,18 +13,6 @@ const GET_HOUSES = gql`
 }
 `;
 
-const GET_USERS = gql`
-  {
-    users @client {
-      id
-      name
-      age
-      email
-      img
-    }
-  }
-`;
-
 const Houses = () => (
     <Query query={GET_HOUSES}>
     {({ data : { houses } }) => (

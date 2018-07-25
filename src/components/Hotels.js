@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from "react";
-import { graphql, Query } from "react-apollo";
+import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import { Link } from "react-router-dom";
 import { Grid, Card, Image, Button, Icon } from "semantic-ui-react";
@@ -23,7 +23,7 @@ class Hotels extends Component {
   state = {};
   render() {
     console.log(" all hotel data...", this.props);
-    
+
     const hotel = this.props.data.hotels.map(hotel => (
       <div key={hotel.id}>
         <Grid>
@@ -81,21 +81,19 @@ class Hotels extends Component {
 
 const HotelViewPageWithQuery = graphql(GET_HOTELS)(Hotels);
 
-
-const UserList = () => (
-  <Query query={GET_HOTELS}>
-    {({ data: { hotels } }) => (
-      <ul>
-        {hotels.map(user => (
-          <li key={user.id}>
-            {console.log("Map hotel List: ", user)}
-            Hotel Name: {user.name}
-          </li>
-        ))}
-      </ul>
-    )}
-  </Query>
-);
-
+// const UserList = () => (
+//   <Query query={GET_HOTELS}>
+//     {({ data: { hotels } }) => (
+//       <ul>
+//         {hotels.map(user => (
+//           <li key={user.id}>
+//             {console.log("Map hotel List: ", user)}
+//             Hotel Name: {user.name}
+//           </li>
+//         ))}
+//       </ul>
+//     )}
+//   </Query>
+// );
 
 export default HotelViewPageWithQuery;

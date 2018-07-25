@@ -6,6 +6,7 @@ import gql from "graphql-tag";
 
 import { Grid, Card, Image, Button, Icon } from "semantic-ui-react";
 import CustomMap from "./CustomMap";
+import Header from './Header_1';
 
 const GET_HOTELS = gql`
   {
@@ -73,5 +74,11 @@ const HotelList = () => (
   </Query>
 );
 
+const HotelListWithHeader = () => (
+  <div>
+    <Header />
+    <HotelList />
+  </div>
+)
 
-export default HotelList;
+export default HotelListWithHeader;

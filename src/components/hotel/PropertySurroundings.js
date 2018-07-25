@@ -1,6 +1,6 @@
 // @flow
 import React from "react";
-import { Grid, Message, Rating } from "semantic-ui-react";
+import { Grid, Message } from "semantic-ui-react";
 const PropertySurroundings = props => (
   <Message>
     <Message.Header>

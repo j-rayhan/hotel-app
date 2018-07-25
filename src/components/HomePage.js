@@ -9,8 +9,7 @@ import {
   Grid,
   Container,
   Input,
-  Modal,
-  Header
+  Modal
 } from "semantic-ui-react";
 import DatePicker from "react-datepicker";
 import moment from "moment";
@@ -70,7 +69,7 @@ class MenuExampleInvertedSegment extends Component {
 }
 
 class Banner extends Component {
-  state = { startDate: undefined, endDate: undefined , trigger:false};
+  state = { startDate: undefined, endDate: undefined };
   handleChangeStart = date => this.setState({ startDate: date });
   handleChangeEnd = date => this.setState({ endDate: date });
   addOption = e => {
@@ -80,7 +79,7 @@ class Banner extends Component {
     const departure_date = e.target.elements.departure_date.value.trim();
     const adults = e.target.elements.adults.value.trim();
     const children = e.target.elements.children.value.trim();
-    const searchValue = {
+    const searchOptions = {
       destination: destination,
       arrival_date: arrival_date,
       departure_date: departure_date,
@@ -92,7 +91,9 @@ class Banner extends Component {
     } else {
       this.props.history.push("/hotels");
     }
-    console.log("serarch value:  ", searchValue);
+    // console.log("serarch value:  ", searchOptions);
+    const json = JSON.stringify(searchOptions); // js {} to json
+    localStorage.setItem("searchOptions", json);
   };
   render() {
     return (
@@ -112,9 +113,9 @@ class Banner extends Component {
                 <Grid.Column>
                   <Segment style={{ textAlign: "left", padding: "7px" }}>
                     <Input
-                      fluid 
+                      fluid
                       icon="search"
-                      iconPosition='left'
+                      iconPosition="left"
                       type="text"
                       placeholder="ENTER A DESTINATION OR PROPERTY"
                       name="destination"
@@ -166,7 +167,7 @@ class Banner extends Component {
                     <Input
                       fluid
                       icon="users"
-                      iconPosition='left'
+                      iconPosition="left"
                       type="text"
                       placeholder="ADULTS"
                       name="adults"
@@ -176,9 +177,9 @@ class Banner extends Component {
                 <Grid.Column>
                   <Segment style={{ padding: "7px" }}>
                     <Input
-                      fluid 
+                      fluid
                       icon="child"
-                      iconPosition='left'
+                      iconPosition="left"
                       type="text"
                       placeholder="CHILDREN"
                       name="children"
@@ -202,29 +203,35 @@ class Banner extends Component {
 
 // Advanced Search Modal
 class AdvancedSearchModal extends Component {
-  state = { open: false }
+  state = { open: false };
 
-  show = dimmer => () => this.setState({ dimmer, open: true })
-  close = () => this.setState({ open: false })
+  show = dimmer => () => this.setState({ dimmer, open: true });
+  close = () => this.setState({ open: false });
 
   render() {
-    const { open, dimmer } = this.state
+    const { open, dimmer } = this.state;
 
     return (
       <div>
-      <Input 
-        label={{ icon: 'asterisk' }} 
-        labelPosition='left corner' 
-        placeholder='Advanced Search...'
-        onClick={this.show('inverted')} 
+        <Input
+          label={{ icon: "asterisk" }}
+          labelPosition="left corner"
+          placeholder="Advanced Search..."
+          onClick={this.show("inverted")}
         />
-      <Modal size='small' dimmer={dimmer} open={open} onClose={this.close} closeIcon>
-        <Modal.Content>
-          <CustomMap />
-        </Modal.Content>
-      </Modal>
-    </div>
-    )
+        <Modal
+          size="small"
+          dimmer={dimmer}
+          open={open}
+          onClose={this.close}
+          closeIcon
+        >
+          <Modal.Content>
+            <CustomMap />
+          </Modal.Content>
+        </Modal>
+      </div>
+    );
   }
 }
 

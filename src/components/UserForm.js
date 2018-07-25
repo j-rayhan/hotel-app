@@ -34,14 +34,6 @@ const UserForm = (props) => (
                   img: img.value
                 }
               });
-              // .then(res => {
-              //   console.log("====================================");
-              //   console.log(this.props.history.push("/"));
-              //   console.log("====================================");
-              // });
-              // (name.value = "")((age.value = ""))((email.value = ""))(
-                // (img.value = "")
-              // );
               props.history.push("/users");
             }}
           >

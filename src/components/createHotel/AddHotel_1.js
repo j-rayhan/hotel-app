@@ -1,6 +1,6 @@
 //flow
 import React from "react";
-import { Form, Label , Button} from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 
@@ -17,7 +17,7 @@ const ADD_HOTEL = gql`
 const HotelForm = (props) => (
   <Mutation mutation={ADD_HOTEL}>
     {addHotel => {
-      let name, email, location, price, img, overview ,img_file;
+      let name, email, location, price, overview ,img_file;
       return (
         <div>
           <Form
@@ -89,7 +89,6 @@ const HotelForm = (props) => (
               let fileToLoad = e.target.files[0];
               let fileReader = new FileReader();
               // console.log("fileToLoad", fileToLoad);
-
               fileReader.onload = function(fileLoadedEvent) {
                 let srcData = fileLoadedEvent.target.result; // <--- data: base64
                 // console.log(srcData);
