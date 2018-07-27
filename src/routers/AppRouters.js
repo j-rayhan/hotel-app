@@ -22,7 +22,7 @@ const AppRouters = () => (
     <div>
       <Switch>
         <Route path="/" component={HomePag} exact={true} />
-        <Route path="/a" component={AddHotel} />
+        <Route path="/add" component={AddHotel} />
         <Route path="/houses" component={HouseList} />
         <Route path="/houseForm" component={AddHouse} />
         <Route path="/hotels" component={Hotels} />

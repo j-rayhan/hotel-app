@@ -1,7 +1,7 @@
 //flow
 import React, { Component } from "react";
 import _ from "lodash";
-import { compose, withProps, lifecycle , withStateHandlers } from "recompose";
+import { compose, withProps, lifecycle, withStateHandlers } from "recompose";
 import {
   withScriptjs,
   withGoogleMap,
@@ -24,14 +24,17 @@ const MyMapComponent = compose(
     containerElement: <div style={{ height: `400px` }} />,
     mapElement: <div style={{ height: `100%` }} />
   }),
-  withStateHandlers(() => ({
-    isOpen: true,
-    // m_lat: 0, m_lng: 0
-  }), {
-    onToggleOpen: ({ isOpen }) => () => ({
-      isOpen: false,
-    })
-  }),
+  withStateHandlers(
+    () => ({
+      isOpen: true
+      // m_lat: 0, m_lng: 0
+    }),
+    {
+      onToggleOpen: ({ isOpen }) => () => ({
+        isOpen: false
+      })
+    }
+  ),
   withScriptjs,
   withGoogleMap,
   lifecycle({
@@ -42,9 +45,9 @@ const MyMapComponent = compose(
           center: {
             lat: position.coords.latitude,
             lng: position.coords.longitude
-          },
+          }
           // m_lat: position.coords.latitude, m_lng: position.coords.longitude
-        })
+        });
       };
       if (navigator.geolocation) {
         navigator.geolocation.watchPosition(showPosition);
@@ -179,6 +182,5 @@ class CustomMap extends Component {
 }
 
 export default CustomMap;
-
 
 // https://gist.githubusercontent.com/farrrr/dfda7dd7fccfec5474d3/raw/758852bbc1979f6c4522ab4e92d1c92cba8fb0dc/data.json

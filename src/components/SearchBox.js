@@ -3,12 +3,12 @@ import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import {
-  // Input,
   Dropdown,
   Segment,
   Grid,
   Container,
-  Input
+  Input,
+  Button
 } from "semantic-ui-react";
 
 import { countryOptions } from "./Country";
@@ -108,7 +108,6 @@ class SearchBox_1 extends Component {
           placeholder="Select Country"
           onChange={this.handleSearchValue}
           options={countryOptions}
-          name="al"
         />
       </div>
     );
@@ -142,11 +141,13 @@ class SearchBox_3 extends Component {
       const json = localStorage.getItem("searchOptions");
       const options = JSON.parse(json); // json to js {}
       if (options) {
-        console.log("...local storage...", options);
+        // var mydate = new Date(options.arrival_date);
+        // console.log(mydate.toDateString());
+        // console.log("...local storage...", options);
 
         this.setState({
-          startDate: options.arrival_date,
-          endDate: options.departure_date,
+          startDate: moment(options.arrival_date),
+          endDate: moment(options.departure_date),
           destination: options.destination,
           adults: options.adults,
           children: options.children
@@ -164,6 +165,7 @@ class SearchBox_3 extends Component {
   }
   handleChangeStart = date => this.setState({ startDate: date });
   handleChangeEnd = date => this.setState({ endDate: date });
+  handleChange = (e, { name, value }) => this.setState({ [name]: value });
   addOption = e => {
     e.preventDefault();
     const destination = e.target.elements.destination.value.trim();
@@ -187,6 +189,8 @@ class SearchBox_3 extends Component {
   };
   render() {
     let { startDate, endDate, destination, adults, children } = this.state;
+    console.log(".....state....", this.state);
+
     return (
       <Container>
         <form onSubmit={this.addOption}>
@@ -194,14 +198,14 @@ class SearchBox_3 extends Component {
             <Grid.Row columns={1}>
               <Grid.Column>
                 <Segment style={{ textAlign: "left", padding: "5px" }}>
-                  <Input
+                  <Dropdown
                     fluid
+                    className="icon"
                     icon="search"
-                    iconPosition="left"
-                    type="text"
-                    placeholder="ENTER A DESTINATION OR PROPERTY"
-                    name="destination"
-                    value={destination}
+                    selection
+                    placeholder="Select Country"
+                    onChange={this.handleChange}
+                    options={countryOptions}
                   />
                 </Segment>
               </Grid.Column>
@@ -211,10 +215,10 @@ class SearchBox_3 extends Component {
                 <Segment style={{ padding: "5px" }}>
                   <DatePicker
                     isClearable={true}
-                    selected={this.state.startDate}
+                    selected={startDate}
                     selectsStart
-                    startDate={this.state.startDate}
-                    endDate={this.state.endDate}
+                    startDate={startDate}
+                    endDate={endDate}
                     onChange={this.handleChangeStart.bind(this)}
                     minDate={moment()}
                     peekNextMonth
@@ -223,7 +227,6 @@ class SearchBox_3 extends Component {
                     dropdownMode="select"
                     placeholderText="Select an arrival date"
                     name="arrival_date"
-                    // value={startDate}
                   />
                 </Segment>
               </Grid.Column>
@@ -231,10 +234,10 @@ class SearchBox_3 extends Component {
                 <Segment style={{ padding: "5px" }}>
                   <DatePicker
                     isClearable={true}
-                    selected={this.state.endDate}
+                    selected={endDate}
                     selectsEnd
-                    startDate={this.state.startDate}
-                    endDate={this.state.endDate}
+                    startDate={startDate}
+                    endDate={endDate}
                     onChange={this.handleChangeEnd.bind(this)}
                     minDate={moment()}
                     peekNextMonth
@@ -243,7 +246,6 @@ class SearchBox_3 extends Component {
                     dropdownMode="select"
                     placeholderText="Select a departure date"
                     name="departure_date"
-                    // value={endDate}
                   />
                 </Segment>
               </Grid.Column>
@@ -256,6 +258,7 @@ class SearchBox_3 extends Component {
                     type="text"
                     placeholder="ADULTS"
                     name="adults"
+                    onChange={this.handleChange}
                     value={adults}
                   />
                 </Segment>
@@ -269,11 +272,17 @@ class SearchBox_3 extends Component {
                     type="text"
                     placeholder="CHILDREN"
                     name="children"
+                    onChange={this.handleChange}
                     value={children}
                   />
                 </Segment>
               </Grid.Column>
             </Grid.Row>
+            <div style={{ margin: " 0 auto", display: "flex" }}>
+              <Button positive style={{ padding: "12.5px 5px" }}>
+                CHECK AVAILABILITY
+              </Button>
+            </div>
           </Grid>
         </form>
       </Container>

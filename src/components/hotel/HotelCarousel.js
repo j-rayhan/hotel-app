@@ -3,7 +3,7 @@ import React from "react";
 import { Carousel } from "react-responsive-carousel";
 
 const MyCarousel = () => (
-  <div style={{ width: "600px" }}>
+  <div>
     <Carousel autoPlay infiniteLoop={true} showArrows={true}>
       <div>
         <img

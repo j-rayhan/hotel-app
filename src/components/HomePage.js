@@ -79,6 +79,7 @@ class Banner extends Component {
     const departure_date = e.target.elements.departure_date.value.trim();
     const adults = e.target.elements.adults.value.trim();
     const children = e.target.elements.children.value.trim();
+
     const searchOptions = {
       destination: destination,
       arrival_date: arrival_date,
@@ -91,7 +92,7 @@ class Banner extends Component {
     } else {
       this.props.history.push("/hotels");
     }
-    // console.log("serarch value:  ", searchOptions);
+    // console.log("serarch value:  type ", typeof arrival_date);
     const json = JSON.stringify(searchOptions); // js {} to json
     localStorage.setItem("searchOptions", json);
   };
@@ -107,7 +108,7 @@ class Banner extends Component {
         </h1>
         <h3>ENJOY YOUR LIFE WITH US!</h3>
         <Container>
-          <form onSubmit={this.addOption}>
+          <form onSubmit={this.addOption} autocomplete={"off"}>
             <Grid style={{ margin: "0 18px" }}>
               <Grid.Row columns={1}>
                 <Grid.Column>
@@ -234,6 +235,14 @@ class AdvancedSearchModal extends Component {
     );
   }
 }
+
+const AlertModal = () => (
+  <Modal size="small" onClose={this.close} closeIcon>
+    <Modal.Content>
+      <p>"please insert your DESTINATION OR PLACE"</p>
+    </Modal.Content>
+  </Modal>
+);
 
 const MyCarousel = () => (
   <Carousel

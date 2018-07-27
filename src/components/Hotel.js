@@ -2,13 +2,14 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import { Item, Button, Icon } from "semantic-ui-react";
+import { Item, Button, Icon, Grid } from "semantic-ui-react";
 
 import MyCarousel from "./hotel/HotelCarousel";
 import Overview from "./hotel/Overview";
 import Facilities from "./hotel/Facilities";
 import GuestReviews from "./hotel/GuestReviews";
 import PropertySurroundings from "./hotel/PropertySurroundings";
+import BookForm from "./book/BookForm";
 const GET_HOTELS = gql`
   {
     hotels @client {
@@ -32,11 +33,20 @@ class Hotel extends Component {
     );
     return (
       <div>
+        HI Hotel <p>{this.props.match.params.id}</p>
+        <Grid columns={2}>
+          <Grid.Row>
+            <Grid.Column width={11}>
+              <MyCarousel />
+            </Grid.Column>
+            <Grid.Column width={5}>
+              <BookForm />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
         <Item.Group>
-          HI Hotel <p>{this.props.match.params.id}</p>
           {data.map(hotel => (
             <div key={hotel.id}>
-              <MyCarousel />
               <Item>
                 <Item.Content>
                   <Item.Header as="a">{hotel.name}</Item.Header>

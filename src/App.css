@@ -31,6 +31,13 @@
   font-size: 1.5em;
 }
 
+.StyleBlock {
+  background-color: "yellow";
+  display: "block";
+  border: "1px solid #DBDBDB";
+  border-radius: "2px";
+  width: "100%";
+}
 .App-intro {
   font-size: large;
 }
