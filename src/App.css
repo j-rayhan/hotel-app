@@ -50,6 +50,12 @@
   /* display: flex !important; */
   margin-top: 0px;
 }
+.react-datepicker__input-container {
+  width: 95%;
+}
+.react-datepicker__input-container > input {
+  width: 100%;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
