@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from "react";
 
-import { Grid, Input } from "semantic-ui-react";
+import { Grid, Input } from "semantic-ui-react/dist/commonjs";
 
 class SearchOption extends Component {
   render() {

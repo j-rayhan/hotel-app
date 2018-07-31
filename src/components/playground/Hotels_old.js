@@ -4,7 +4,7 @@ import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import { Link } from "react-router-dom";
 import { Grid, Card, Image, Button, Icon } from "semantic-ui-react";
-import CustomMap from "./CustomMap";
+import CustomMap from "../googleMap/CustomMap";
 
 const GET_HOTELS = gql`
   {

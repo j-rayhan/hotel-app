@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import gql from "graphql-tag";
 
 import { Grid, Card, Image, Button, Icon } from "semantic-ui-react";
-import CustomMap from "./CustomMap";
-import Header from "./Header_1";
-import Search from "./playground/SearchBox";
+import CustomMap from "../googleMap/CustomMap";
+import Header from "../common/Header_1";
+// import Search from "../playground/SearchBox";
 
 const GET_HOTELS = gql`
   {

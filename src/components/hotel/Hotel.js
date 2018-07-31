@@ -4,12 +4,12 @@ import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import { Item, Button, Icon, Grid } from "semantic-ui-react";
 
-import MyCarousel from "./hotel/HotelCarousel";
-import Overview from "./hotel/Overview";
-import Facilities from "./hotel/Facilities";
-import GuestReviews from "./hotel/GuestReviews";
-import PropertySurroundings from "./hotel/PropertySurroundings";
-import BookForm from "./book/BookForm";
+import MyCarousel from "./HotelCarousel";
+import Overview from "./Overview";
+import Facilities from "./Facilities";
+import GuestReviews from "./GuestReviews";
+import PropertySurroundings from "./PropertySurroundings";
+import BookForm from "../book/BookForm";
 const GET_HOTELS = gql`
   {
     hotels @client {

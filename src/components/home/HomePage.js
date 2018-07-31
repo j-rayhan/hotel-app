@@ -1,5 +1,7 @@
 // @flow
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
 import { Carousel } from "react-responsive-carousel";
 import {
   Menu,
@@ -13,8 +15,9 @@ import {
 } from "semantic-ui-react";
 import DatePicker from "react-datepicker";
 import moment from "moment";
-import Signup from "./signup/SignUp";
-import CustomMap from "./CustomMap";
+// import Signup from "./signup/SignUp";
+// import LogIn from "./login";
+import CustomMap from "../googleMap/CustomMap";
 
 // import slide_1 from "../assets/images/carousel/slider-1.jpg";
 // import slide_2 from "../assets/images/carousel/slider-2.jpg";
@@ -27,6 +30,8 @@ class MenuExampleInvertedSegment extends Component {
 
   render() {
     const { activeItem } = this.state;
+    console.log("..........", this.props);
+
     return (
       <div>
         <Segment inverted>
@@ -52,12 +57,18 @@ class MenuExampleInvertedSegment extends Component {
 
             <Menu.Menu position="right">
               <Menu.Item>
-                <Signup />
+                <Link to={`/signup`}>
+                  <Button as="a" inverted style={{ marginLeft: "0.5em" }}>
+                    Sign UP
+                  </Button>
+                </Link>
               </Menu.Item>
               <Menu.Item>
-                <Button as="a" inverted style={{ marginLeft: "0.5em" }}>
-                  Log In
-                </Button>
+                <Link to={`/login`}>
+                  <Button as="a" inverted style={{ marginLeft: "0.5em" }}>
+                    Log In
+                  </Button>
+                </Link>
               </Menu.Item>
             </Menu.Menu>
           </Menu>
@@ -91,12 +102,15 @@ class Banner extends Component {
       alert("please insert your DESTINATION OR PLACE");
     } else {
       this.props.history.push("/hotels");
+      // console.log("....history...", this.props);
     }
     // console.log("serarch value:  type ", typeof arrival_date);
     const json = JSON.stringify(searchOptions); // js {} to json
     localStorage.setItem("searchOptions", json);
   };
   render() {
+    // console.log("....history...", this.props);
+
     return (
       <div
         style={{
@@ -108,7 +122,7 @@ class Banner extends Component {
         </h1>
         <h3>ENJOY YOUR LIFE WITH US!</h3>
         <Container>
-          <form onSubmit={this.addOption} autocomplete={"off"}>
+          <form onSubmit={this.addOption} autoComplete={"off"}>
             <Grid style={{ margin: "0 18px" }}>
               <Grid.Row columns={1}>
                 <Grid.Column>

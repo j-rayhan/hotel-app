@@ -18,10 +18,11 @@ const cache = new InMemoryCache();
 const typeDefs = `
 type User {
     id: Int!
-    name: String!
-    age: Int!
+    firstName: String!
+    lastName: String!
+    password: String!
     email: String!
-    img: String!
+    dob: String!
 }
 type House {
   id: Int!
@@ -38,7 +39,8 @@ type Hotel {
   overview: String!
 }
 type Mutation {
-  addUser(name: String!, age: Int!, email: String!, img: String!): User,
+  
+  addUser(email: String!, firstName: String!, lastName: Sring!, password: String!, dob: String!): User,
   addHouse(name: String!, email: String!): House,
   addHotel(name: String!, email: String!): Hotel,
   addHotel_new(name: String!, email: String!, price: String!, location: String!, img: String!, overview: String!): Hotel

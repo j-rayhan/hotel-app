@@ -1,21 +1,18 @@
 // @flow
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-// import Home from "../components/Home";
-// import UserForm from "../components/UserForm";
-// import UserList from "../components/UserList";
-// import UserDetails from "../components/UserDetails";
-import NotFoundPage from "../components/NotFoundPage";
-// import Header from "../components/Header";
-import Hotels from "../components/Hotels_1";
-import Hotels_old from "../components/Hotels";
-import Hotel from "../components/Hotel";
+import NotFoundPage from "../components/common/NotFoundPage";
+import Hotels from "../components/hotel/Hotels_1";
+import Hotel from "../components/hotel/Hotel";
 import AddHotel from "../components/createHotel/AddHotel_1";
 import HouseList from "../components/house/houses";
 import AddHouse from "../components/house/AddHouse";
 
-import HomePag from "../components/HomePage";
-// import HomePag from "../components/playground/ModalExample";
+import HomePag from "../components/home";
+import LoginPage from "../components/authenticate/login";
+import SignUpPage from "../components/authenticate/signup";
+import SignUpPageWithEmail from "../components/authenticate/signup/WithEmail";
+import SignUpPageWithPhone from "../components/authenticate/signup/WithPhone";
 
 const AppRouters = () => (
   <BrowserRouter>
@@ -23,10 +20,13 @@ const AppRouters = () => (
       <Switch>
         <Route path="/" component={HomePag} exact={true} />
         <Route path="/add" component={AddHotel} />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/signup" component={SignUpPage} />
+        <Route path="/signupWithEmail" component={SignUpPageWithEmail} />
+        <Route path="/signupWithPhone" component={SignUpPageWithPhone} />
         <Route path="/houses" component={HouseList} />
         <Route path="/houseForm" component={AddHouse} />
         <Route path="/hotels" component={Hotels} />
-        <Route path="/hotels_old" component={Hotels_old} />
         <Route path="/hotel/:id" component={Hotel} />
         <Route component={NotFoundPage} />
       </Switch>
